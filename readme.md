@@ -9,3 +9,5 @@ Since this project is under construction, the features will be added once in a w
 
 Start the app with the command:
     docker compose -f deployment/docker-compose.yaml up --build
+
+The purpose of this app is to learn frontend development and docker containerization.
