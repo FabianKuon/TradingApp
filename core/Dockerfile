@@ -5,11 +5,11 @@ FROM python:latest
 WORKDIR /app
 
 # Install requirements
-COPY ./requiremtents.txt /app
+COPY requiremtents.txt /app
 RUN pip install --no-chache-dir --upgrade  -r requirements.txt
 
 # Copy scripts to the app folder
-COPY . /app
+COPY . /app/backend
 
 # Start the server
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80"]

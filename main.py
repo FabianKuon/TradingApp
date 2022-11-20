@@ -7,7 +7,7 @@ from database.models.StockModel import Base
 
 app = FastAPI()
 
-origins = ["http://localhost:8000"]
+origins = ["http://localhost:8080"]
 
 app.add_middleware(
     CORSMiddleware,
