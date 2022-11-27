@@ -1,12 +1,28 @@
 services:
+  postgres-db:
+    image: postgres:alpine
+    environment:
+      POSTGRES_USER: stocktrader
+      POSTGRES_PASSWORD: stocktrader
+    ports:
+      - "5432:5432"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
   backend:
     build:
-      dockerfile: ../core/Dockerfile
+      context: ../.
+      dockerfile: deployment/docker/backend/Dockerfile
     container_name: stock-api
-    command: uvicorn main:app --host 0.0.0.0 --port 80 --reload
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
     ports:
-      - 8080:80
-    volumes:
-      - .:/app
-
-  # frontend:
+      - "8090:80"
+    environment:
+      DB_NAME: postgres
+      DB_USER: slotzuser
+      DB_PASSWORD: slotzpw
+      DB_PORT: 5432
+      DB_HOST: host.docker.internal
+    restart: unless-stopped
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
