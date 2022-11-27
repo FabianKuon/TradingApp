@@ -13,14 +13,14 @@ services:
     build:
       context: ../.
       dockerfile: deployment/docker/backend/Dockerfile
-    container_name: stock-api
-    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+    container_name: stock-backend
+    command: uvicorn core.main:app --host 0.0.0.0 --port 8000 --reload
     ports:
       - "8090:80"
     environment:
       DB_NAME: postgres
-      DB_USER: slotzuser
-      DB_PASSWORD: slotzpw
+      DB_USER: stocktrader
+      DB_PASSWORD: stocktrader
       DB_PORT: 5432
       DB_HOST: host.docker.internal
     restart: unless-stopped
